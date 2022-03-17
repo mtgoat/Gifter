@@ -22,5 +22,7 @@ namespace Gifter.Models
 
         public DateTime DateCreated { get; set; }
 
+        public string Bio {  get; set; }
+
     }
 }

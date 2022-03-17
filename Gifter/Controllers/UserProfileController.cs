@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Gifter.Repositories;
 using Gifter.Models;
+using Gifter.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace Gifter.Controllers
 {
@@ -21,6 +22,24 @@ namespace Gifter.Controllers
         public IActionResult GetAllPostsByUserId(int userId)
         {
             return Ok(_userProfileRepository.GetAllPostsByUserId(userId));
+        }
+
+        [HttpGet("GetByEmail")]
+        public IActionResult GetByEmail(string email)
+        {
+            var user = _userProfileRepository.GetByEmail(email);
+            if (email == null || user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public IActionResult Post(UserProfile user)
+        {
+            _userProfileRepository.Add(user);
+            return CreatedAtAction("GetByEmail", new { email = user.Email }, user);
         }
     }
 }
