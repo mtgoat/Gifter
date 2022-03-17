@@ -21,7 +21,7 @@ namespace Gifter.Repositories
                     cmd.CommandText = @"
                 SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated,
                        p.ImageUrl AS PostImageUrl, p.UserProfileId AS PostUserProfileId,
-                       up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated,
+                       up.Name as UserProfileName, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated,
                        up.ImageUrl AS UserProfileImageUrl,
                        c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId
                   FROM Post p
@@ -46,6 +46,11 @@ namespace Gifter.Repositories
                             DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
                             ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
                             UserProfileId = userId,
+                            UserProfile = new UserProfile()
+                            {
+                                Name = DbUtils.GetString(reader, "UserProfileName"),
+
+                            },
                             Comments = new List<Comment>()
                         });
 
