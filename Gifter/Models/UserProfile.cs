@@ -6,6 +6,10 @@ namespace Gifter.Models
 {
     public class UserProfile
     {
+        public UserProfile()
+        {
+            DateCreated = DateTime.Now;
+        }
         public int Id { get; set; }
 
         [Required]
@@ -16,7 +20,6 @@ namespace Gifter.Models
 
         public string ImageUrl { get; set; }
 
-        [Required]
         public DateTime DateCreated { get; set; }
 
     }

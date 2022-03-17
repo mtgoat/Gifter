@@ -13,5 +13,7 @@ namespace Gifter.Repositories
         List<Post> GetAllWithComments();
         Post GetPostByIdWithComments(int id);
         List<Post> Search(string criterion, bool sortDescending);
+
+        public List<Post> GetAllPostsByUserId(int userId);
     }
 }
